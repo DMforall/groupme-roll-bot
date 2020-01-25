@@ -1,7 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
-botCommand =  /^\/roll/;
+botCommand =  /^\/!/;
 //roll
 //d4, d6, d8, d10, d20
 // @User rolls val
@@ -21,7 +21,8 @@ function respond() {
 function commandHandler(relThis, command){
   var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
       rollMin = 0,
-      rollMax = 0;
+      rollMax = 0,
+      thisRoll = 0;
 /*
 Default vals
       rollCount = 1; //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
@@ -38,6 +39,7 @@ if(!command.text.split(' ')[1]){
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   rollMin = 1;
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+  thisRoll = roll(rollCount, rollMin, rollMax);
 //} else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
 //min max option removed
 //  rollCount = 1;
@@ -48,31 +50,31 @@ if(!command.text.split(' ')[1]){
   rollMin = 0;
   rollMax = 0;
 }
-  console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  relThis.res.writeHead(200);
-  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
-  relThis.res.end();
+  //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
+  //relThis.res.writeHead(200);
+  //postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
+  //relThis.res.end();
 }
 
 function roll(count, min, max){
   var result = 0;
+  relThis.res.writeHead(200);
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
     if(result == max && (max == 20 || max == 100) ) {
-      relThis.res.writeHead(200);
-      postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
-      relThis.res.end();
+      postMessage(("SMASHING! " + command.name + " rolls " +result+ " on d" +max+ "!!!"), command.name, command.user_id);
+    } else {  
+      postMessage((command.name + " rolls " +result+ " on d" +max+ "."), command.name, command.user_id);
     }
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
       if(result == max && (max == 20 || max == 100) ) {
-        relThis.res.writeHead(200);
         postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
-        relThis.res.end();
       }
     }
   }
+  relThis.res.end();
   return result;
 }
 
