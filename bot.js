@@ -50,7 +50,7 @@ if(!command.text.split(' ')[1]){
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage(("@" + command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " [" + rollCount + "d" + rollMax + "] >>>"), command.name, command.user_id);
+  postMessage(("@" + command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
   relThis.res.end();
 }
 
@@ -59,10 +59,18 @@ function roll(count, min, max){
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
     if(result == max && (max == 20 || max == 100) ) {
-      postMessage(("@" + command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);}
+      relThis.res.writeHead(200);
+      postMessage(("@" + command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
+      relThis.res.end();
+    }
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
+      if(result == max && (max == 20 || max == 100) ) {
+        relThis.res.writeHead(200);
+        postMessage(("@" + command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
+        relThis.res.end();
+      }
     }
   }
   return result;
