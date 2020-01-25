@@ -1,10 +1,10 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
-botCommand =  /^\/rol/;
-//roll
+botCommand =  /^\/rr/;
+//rr
 //d4, d6, d8, d10, d20
-// @User rolls val
+// User rolls val
 
 
 function respond() {
@@ -33,7 +33,7 @@ if(!command.text.split(' ')[1]){
 //Pure Roll
   rollCount = 1;
   rollMin = 1;
-  rollMax = 100;
+  rollMax = 20;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
