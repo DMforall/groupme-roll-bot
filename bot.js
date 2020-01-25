@@ -4,7 +4,7 @@ var botID = process.env.BOT_ID,
 botCommand =  /^\/roll/;
 //roll
 //d4, d6, d8, d10, d20
-// @User rolled: val
+// @User rolls val
 
 
 function respond() {
@@ -50,7 +50,7 @@ if(!command.text.split(' ')[1]){
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage(("@" + command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
+  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
   relThis.res.end();
 }
 
@@ -60,7 +60,7 @@ function roll(count, min, max){
     result = min + Math.floor(Math.random()*(max-min+1));
     if(result == max && (max == 20 || max == 100) ) {
       relThis.res.writeHead(200);
-      postMessage(("@" + command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
+      postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
       relThis.res.end();
     }
   } else {
@@ -68,7 +68,7 @@ function roll(count, min, max){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
       if(result == max && (max == 20 || max == 100) ) {
         relThis.res.writeHead(200);
-        postMessage(("@" + command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
+        postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
         relThis.res.end();
       }
     }
