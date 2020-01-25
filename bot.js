@@ -4,7 +4,6 @@ var botID = process.env.BOT_ID,
 botCommand =  /^\/roll/;
 //roll
 //d4, d6, d8, d10, d20
-//min max
 // @User rolled: val
 
 
@@ -39,11 +38,11 @@ if(!command.text.split(' ')[1]){
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   rollMin = 1;
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-} else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
-//min max
-  rollCount = 1;
-  rollMin = parseInt(command.text.split(' ')[1]);
-  rollMax = parseInt(command.text.split(' ')[2]);
+//} else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
+//min max option removed
+//  rollCount = 1;
+//  rollMin = parseInt(command.text.split(' ')[1]);
+//  rollMax = parseInt(command.text.split(' ')[2]);
 } else {
   rollCount = 1;
   rollMin = 0;
@@ -51,7 +50,7 @@ if(!command.text.split(' ')[1]){
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage(("@" + command.name + " <<< Rolls " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "d" + rollMax + "] >>>"), command.name, command.user_id);
+  postMessage(("@" + command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " [" + rollCount + "d" + rollMax + "] >>>"), command.name, command.user_id);
   relThis.res.end();
 }
 
@@ -59,6 +58,8 @@ function roll(count, min, max){
   var result = 0;
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
+    if(result == max && (max == 20 || max == 100) ) {
+      postMessage(("@" + command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);}
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
