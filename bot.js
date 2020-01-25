@@ -1,7 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
-botCommand =  /^\/rr/;
+botCommand =  /^\/roll/;
 //rr
 //d4, d6, d8, d10, d20
 // User rolls val
@@ -50,31 +50,31 @@ if(!command.text.split(' ')[1]){
   rollMin = 0;
   rollMax = 0;
 }
-  //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  //relThis.res.writeHead(200);
-  //postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
-  //relThis.res.end();
+  console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
+  relThis.res.writeHead(200);
+  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
+  relThis.res.end();
 }
 
 function roll(count, min, max){
   var result = 0;
-  relThis.res.writeHead(200);
+  //relThis.res.writeHead(200);
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
-    if(result == max && (max == 20 || max == 100) ) {
-      postMessage(("SMASHING! " + command.name + " rolls " +result+ " on d" +max+ "!!!"), command.name, command.user_id);
-    } else {  
-      postMessage((command.name + " rolls " +result+ " on d" +max+ "."), command.name, command.user_id);
-    }
+  //  if(result == max && (max == 20 || max == 100) ) {
+  //    postMessage(("SMASHING! " + command.name + " rolls " +result+ " on d" +max+ "!!!"), command.name, command.user_id);
+  //  } else {  
+  //    postMessage((command.name + " rolls " +result+ " on d" +max+ "."), command.name, command.user_id);
+  //  }
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
-      if(result == max && (max == 20 || max == 100) ) {
-        postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
-      }
+  //    if(result == max && (max == 20 || max == 100) ) {
+  //      postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
+  //    }
     }
   }
-  relThis.res.end();
+  //relThis.res.end();
   return result;
 }
 
