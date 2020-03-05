@@ -35,6 +35,7 @@ if(!command.text.split(' ')[1]){
   rollCount = 1;
   rollMin = 1;
   rollMax = 20; // default to d20
+  rollMod = 0;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
