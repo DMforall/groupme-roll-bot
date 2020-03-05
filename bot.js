@@ -1,7 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
-botCommand =  /^\/roll/;
+botCommand =  /^\/rz/;
 //rr
 //d4, d6, d8, d10, d20
 // User rolls val
@@ -22,6 +22,7 @@ function commandHandler(relThis, command){
   var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
       rollMin = 0,
       rollMax = 0,
+      rollMod = 0, //added
       thisRoll = 0;
 /*
 Default vals
@@ -33,13 +34,14 @@ if(!command.text.split(' ')[1]){
 //Pure Roll
   rollCount = 1;
   rollMin = 1;
-  rollMax = 20;
+  rollMax = 20; // default to d20
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   rollMin = 1;
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-  thisRoll = roll(rollCount, rollMin, rollMax);
+  rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+  thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
 //} else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
 //min max option removed
 //  rollCount = 1;
@@ -49,14 +51,15 @@ if(!command.text.split(' ')[1]){
   rollCount = 1;
   rollMin = 0;
   rollMax = 0;
+  rollMod = 0;
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax) + " on " + rollCount + "d" + rollMax + "."), command.name, command.user_id);
+  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + " + " +rollMod), command.name, command.user_id);
   relThis.res.end();
 }
 
-function roll(count, min, max){
+function roll(count, min, max, mod){
   var result = 0;
   //relThis.res.writeHead(200);
   if(count === 1){
@@ -75,7 +78,7 @@ function roll(count, min, max){
     }
   }
   //relThis.res.end();
-  return result;
+  return result + mod;
 }
 
 function postMessage(message, name, id) {
