@@ -1,7 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
-botCommand =  /^\/rz/;
+botCommand =  /^\/[rz]|[roll]/;
 //rr
 //d4, d6, d8, d10, d20
 // User rolls val
