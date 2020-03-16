@@ -59,8 +59,8 @@ function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
   var which = 1;
-  var crit20 = {"Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"};
-  var crit1 = {"Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"};
+  //var crit20 = {"Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"};
+  //var crit1 = {"Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"};
 
   //relThis.res.writeHead(200);
   if(count === 1){
