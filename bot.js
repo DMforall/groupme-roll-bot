@@ -22,22 +22,18 @@ function commandHandler(relThis, command){
   //Default vals   
   var rollCount = 1, 
       rollMin = 1,
-      rollMax = 1,
+      rollMax = 20,
       rollMod = 0, //added
       thisRoll = 0;
 
-if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] && command.text.split(' ')[1].split('+')[1] ){
-  //dice setup with mod
-  rollMod = parseInt(command.text.split('+')[1]);
-  if (rollMod < 0) { rollMod = 0; }
-  if (rollMod > 1000) { rollMod = 1000; }  
-  rollCount = parseInt(command.text.split('d')[0]);
-  if (rollCount < 1) { rollCount = 1; }
-  if (rollCount > 1000) { rollCount = 1000; }
-  rollMax = parseInt( command.text.split('d')[1] );
-  if (rollMax < 1) { rollMax = 1; }
-  if (rollMax > 1000) { rollMax = 1000; } 
-else if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] ) {
+  if ( command.text.split(' ')[1].split('+')[1] ) {
+   //parse out modifier
+   rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+   if (rollMod < 0) { rollMod = 0; }
+   if (rollMod > 1000) { rollMod = 1000; }  
+  }
+  
+/*else if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] ) {
   //dice setup without mod
   rollCount = parseInt( command.text.split('d')[0] );
   if (rollCount < 1) { rollCount = 1; }
@@ -49,10 +45,10 @@ else if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] 
   rollCount = 1;
   rollMax = 20; // default to d20
   rollMod = 0;
-}
+} */
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  relThis.res.writeHead(400);
+  relThis.res.writeHead(200);
   postMessage((command.name + " rolls " + thisRoll + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
