@@ -36,24 +36,25 @@ if(!command.text.split(' ')[1]){
   //var a = parseInt("10d20+5".split("+")[1]) + "<br>"; //mod
   //var b = parseInt("10d20+5".split("+")[0]) + "<br>"; //count
   //var c = parseInt("10d20+5".split("+")[0].split("d")[1]) + "<br>"; //sides
-  rollCount = parseInt(command.text.split("+")[0]);
-  if (rollCount < 1) { rollCount = 1; }
-  if (rollCount > 1000) { rollCount = 1000; }
-  rollMax = parseInt(command.text.split("+")[0].split("d")[1]);
-  if (rollMax < 1) { rollMax = 1; }
-  if (rollMax > 1000) { rollMax = 1000; }
+  if(!command.text.split('+')[1]) { command.text = command.text + "+0" } //add a null modifier
   rollMod = parseInt(command.text.split("+")[1]);
   if (rollMod < 0) { rollMod = 0; }
   if (rollMod > 1000) { rollMod = 1000; }  
-  thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
+  rollCount = parseInt(command.text.split("d")[0]);
+  if (rollCount < 1) { rollCount = 1; }
+  if (rollCount > 1000) { rollCount = 1000; }
+  rollMax = parseInt(command.text.split("d")[1]);
+  if (rollMax < 1) { rollMax = 1; }
+  if (rollMax > 1000) { rollMax = 1000; }
 } else { //backup default 
   rollCount = 1;
   rollMax = 20; // default to d20
   rollMod = 0;
 }
+  thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
+  postMessage((command.name + " rolls " + thisRoll + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
 
