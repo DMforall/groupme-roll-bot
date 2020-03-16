@@ -20,7 +20,7 @@ function respond() {
 
 function commandHandler(relThis, command){
   //Default vals   
-  var rollCount = 1, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
+  var rollCount = 1, 
       rollMin = 1,
       rollMax = 1,
       rollMod = 0, //added
@@ -36,14 +36,14 @@ if(!command.text.split(' ')[1]){
   //var a = parseInt("10d20+5".split("+")[1]) + "<br>"; //mod
   //var b = parseInt("10d20+5".split("+")[0]) + "<br>"; //count
   //var c = parseInt("10d20+5".split("+")[0].split("d")[1]) + "<br>"; //sides
-  if(!command.text.split('+')[1]) { command.text = command.text + "+0" } //add a null modifier
+  if ( !command.text.includes("+") ) { command.text = command.text + "+0" } //add a null modifier
   rollMod = parseInt(command.text.split("+")[1]);
   if (rollMod < 0) { rollMod = 0; }
   if (rollMod > 1000) { rollMod = 1000; }  
-  rollCount = parseInt(command.text.split("d")[0]);
+  rollCount = parseInt( command.text.split("d")[0] );
   if (rollCount < 1) { rollCount = 1; }
   if (rollCount > 1000) { rollCount = 1000; }
-  rollMax = parseInt(command.text.split("d")[1]);
+  rollMax = parseInt( command.text.split("d")[1] );
   if (rollMax < 1) { rollMax = 1; }
   if (rollMax > 1000) { rollMax = 1000; }
 } else { //backup default 
@@ -62,8 +62,8 @@ function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
   var which = 1;
-  var critSuccess = ["Nat 20!","You rocked that!","Ya, mon!","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"];
-  var critFailure = ["Oh no!","A ONE! Really.","Ouch!","Did I roll that?","Darn.","A hungry Illithid licks your brain!","Critical failure!"];
+  var critSuccess = ["Nat 20!","One dead dragon!","You rocked that!","Ya, mon!","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You are a juggernaut!"];
+  var critFailure = ["Oh no!","A ONE! Really.","You did not want to do that anyway.","Ouch!","Did you roll that?","Darn.","A hungry Illithid licks your brain!","Critical failure!"];
 
   //relThis.res.writeHead(200);
   if(count === 1){
