@@ -19,21 +19,20 @@ function respond() {
 
 function commandHandler(relThis, command){
   //Default vals   
-  var rollCount = 1, 
-      rollMin = 1,
-      rollMax = 20,
-      rollMod = 0, //added
-      thisRoll = 0;
+  var    rollCount = 1; 
+  var    rollMin = 1;
+  var    rollMax = 20;
+  var    rollMod = 0; //added
   
   command.text = command.text.toLowerCase;
-    if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
+   /* if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
   }
   
-  /*if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
+  if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
    //dice setup
    rollCount = parseInt( command.text.split(' ')[1].split('d')[0] );
    if (rollCount < 1) { rollCount = 1; }
@@ -43,14 +42,13 @@ function commandHandler(relThis, command){
    if (rollMax > 1000) { rollMax = 1000; } 
   }*/
   
-  thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage((command.name + " rolls " + thisRoll + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
+  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
 
-function roll(count, min, max, mod){
+function roll(count, min, max, mod) {
   var result = 0;
   var textResult = "";
   var which = 1;
