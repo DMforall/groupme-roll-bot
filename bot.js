@@ -33,7 +33,7 @@ function commandHandler(relThis, command){
    if (rollMod > 1000) { rollMod = 1000; }  
   }
   
-  if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
+  /*if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
    //dice setup
    rollCount = parseInt( command.text.split(' ')[1].split('d')[0] );
    if (rollCount < 1) { rollCount = 1; }
@@ -41,7 +41,7 @@ function commandHandler(relThis, command){
    rollMax = parseInt( command.text.split(' ')[1].split('d')[1] );
    if (rollMax < 1) { rollMax = 1; }
    if (rollMax > 1000) { rollMax = 1000; } 
-  }
+  }*/
   
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
