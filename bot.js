@@ -26,26 +26,25 @@ function commandHandler(relThis, command){
       rollMod = 0, //added
       thisRoll = 0;
 
-if(!command.text.split(' ')[1]){
-//Pure Roll
-  rollCount = 1;
-  rollMax = 20; // default to d20
-  rollMod = 0;
-} else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
-//dice setup 
-  //var a = parseInt("10d20+5".split("+")[1]) + "<br>"; //mod
-  //var b = parseInt("10d20+5".split("+")[0]) + "<br>"; //count
-  //var c = parseInt("10d20+5".split("+")[0].split("d")[1]) + "<br>"; //sides
-  if ( !command.text.includes("+") ) { command.text = command.text + "+0" } //add a null modifier
-  rollMod = parseInt(command.text.split("+")[1]);
+if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] && command.text.split(' ')[1].split('+')[1] ){
+  //dice setup with mod
+  rollMod = parseInt(command.text.split('+')[1]);
   if (rollMod < 0) { rollMod = 0; }
   if (rollMod > 1000) { rollMod = 1000; }  
-  rollCount = parseInt( command.text.split("d")[0] );
+  rollCount = parseInt(command.text.split('d')[0]);
   if (rollCount < 1) { rollCount = 1; }
   if (rollCount > 1000) { rollCount = 1000; }
-  rollMax = parseInt( command.text.split("d")[1] );
+  rollMax = parseInt( command.text.split('d')[1] );
   if (rollMax < 1) { rollMax = 1; }
-  if (rollMax > 1000) { rollMax = 1000; }
+  if (rollMax > 1000) { rollMax = 1000; } 
+else if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] ) {
+  //dice setup without mod
+  rollCount = parseInt( command.text.split('d')[0] );
+  if (rollCount < 1) { rollCount = 1; }
+  if (rollCount > 1000) { rollCount = 1000; }
+  rollMax = parseInt( command.text.split('d')[1] );
+  if (rollMax < 1) { rollMax = 1; }
+  if (rollMax > 1000) { rollMax = 1000; } 
 } else { //backup default 
   rollCount = 1;
   rollMax = 20; // default to d20
@@ -53,7 +52,7 @@ if(!command.text.split(' ')[1]){
 }
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  relThis.res.writeHead(200);
+  relThis.res.writeHead(400);
   postMessage((command.name + " rolls " + thisRoll + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
