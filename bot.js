@@ -36,11 +36,11 @@ if(!command.text.split(' ')[1]){
   rollMod = 0;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
-  rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
+  rollCount = parseInt(command.text.split(' ')[1].split('d')[0].trim());
   if (rollCount < 1) { rollCount = 1; }
   if (rollCount > 1000) { rollCount = 1000; }
   rollMin = 1;
-  rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+  rollMax = parseInt(command.text.split(' ')[1].split('d')[1].trim());
   if (rollMax < 1) { rollMax = 1; }
   if (rollMax > 1000) { rollMax = 1000; }
   rollMod = parseInt(command.text.split(' ')[1].split('+')[1].trim());
