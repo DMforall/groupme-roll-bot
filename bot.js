@@ -71,7 +71,7 @@ function roll(count, min, max, mod){
     } 
   }
   textResult = result; //basic total
-  
+  /*
   if(count == 1 && result == max && max == 20  ) {
       //Celebrate natural 20 on d20!
       //which = Math.floor(Math.random()*(crit20.length)); //choose a message
@@ -83,6 +83,7 @@ function roll(count, min, max, mod){
   } else {
       textResult = result + mod; 
   }
+  */
   return textResult;
 }
 
