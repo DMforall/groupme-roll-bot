@@ -74,24 +74,45 @@ function roll(count, min, max, mod){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
     }
   }
-  //Celebrate natural 20
-  which = 1 + Math.floor(Math.random()*(3));
-  switch (which) {
-  case 1:
-    message = "(Nat 20!)";
-    break; 
-  case 2:
-    message = "(Yah, mon!)";
-    break; 
-  case 3:
-    message = "(Wowsers!)";
-    break;  
-  default: 
-    message = "(Nat 20!)";
-   }
   
   if(count == 1 && result == max && max == 20  ) {
+      //Celebrate natural 20
+       which = 1 + Math.floor(Math.random()*(3)); //choose a message
+      switch (which) {
+        case 1:
+         message = "(Nat 20!)";
+         break; 
+        case 2:
+         message = "(Yah, mon!)";
+         break; 
+        case 3:
+         message = "(Wowsers!)";
+         break;  
+        default: 
+         message = "(Nat 20!)";
+       }
       textResult = result + mod + " " + message;
+  } else if (count == 1 && result == 1 && max == 20) {
+      //Curse natural 1 on d20
+       which = 1 + Math.floor(Math.random()*(4)); //choose a message
+      switch (which) {
+        case 1:
+         message = "(ONE! Ouch!)";
+         break; 
+        case 2:
+         message = "(I didn't just roll that. Did I?)";
+         break; 
+        case 3:
+         message = "(Darn!)";
+         break;  
+        case 4: 
+         message = "(Critical failure!)" 
+         break;
+        default: 
+         message = "(ONE! Ouch!)";
+       }
+      textResult = result + mod + " " + message;    
+  
   } else {
       textResult = result + mod; 
   }
