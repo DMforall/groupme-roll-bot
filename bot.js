@@ -59,8 +59,8 @@ function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
   var which = 1;
-  var critSuccess = {"Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"};
-  var critFailure = {"Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"};
+  var critSuccess = ["Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"];
+  var critFailure = ["Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"];
 
   //relThis.res.writeHead(200);
   if(count === 1){
@@ -74,12 +74,12 @@ function roll(count, min, max, mod){
   
   if(count == 1 && result == max && max == 20  ) {
       //Celebrate natural 20 on d20!
-      //which = Math.floor(Math.random()*(critSuccess.length)); //choose a message
-      textResult = result + mod + " (20!)"; //+ critSuccess[which] + ")";    
+      which = Math.floor(Math.random()*critSuccess.length); //choose a message
+      textResult = result + mod + "(" + critSuccess[which] + ")";    
   } else if (count == 1 && result == 1 && max == 20) {
       //Curse natural 1 on d20!
-      //which = Math.floor(Math.random()*(critFailure.length)); //choose a message
-      textResult = result + mod + " (1!)";// + critFailure[which] + ")";    
+      which = Math.floor(Math.random()*critFailure.length); //choose a message
+      textResult = result + mod + " (" + critFailure[which] + ")";    
   } else {
       textResult = result + mod; 
   }
