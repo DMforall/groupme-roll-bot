@@ -43,7 +43,7 @@ if(!command.text.split(' ')[1]){
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
   if (rollMax < 1) { rollMax = 1; }
   if (rollMax > 1000) { rollMax = 1000; }
-  rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+  rollMod = parseInt(command.text.split(' ')[1].split('+')[1].trim());
   if (rollMod < 0) { rollMod = 0; }
   if (rollMod > 1000) { rollMod = 1000; }  
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
