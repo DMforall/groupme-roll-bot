@@ -22,7 +22,7 @@ This bot is used for standard
   * [Heroku Toolbelt](https://toolbelt.heroku.com/)
 
 # Bot Commands<a name="commands"></a>
-/roll (range 1 - 100):
+/roll (range 1 - 20):
     
     /roll
 
@@ -31,9 +31,9 @@ This bot is used for standard
 
     /roll 1d20
 
-/roll min max (range min - max):
+/roll xdy+z (rolls x dice of y sides + z modifier):
 
-    /roll 5 500
+    /roll 5d6+5
 
 # Get your bot up and running<a name="deploy"></a>
 
