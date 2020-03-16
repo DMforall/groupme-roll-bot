@@ -31,16 +31,14 @@ Default vals
 if(!command.text.split(' ')[1]){
 //Pure Roll
   rollCount = 1;
-  rollMin = 1;
   rollMax = 20; // default to d20
   rollMod = 0;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
-  rollCount = parseInt(command.text.split(' ')[1].split('d')[0].trim());
+  rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   if (rollCount < 1) { rollCount = 1; }
   if (rollCount > 1000) { rollCount = 1000; }
-  rollMin = 1;
-  rollMax = parseInt(command.text.split(' ')[1].split('d')[1].trim());
+  rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
   if (rollMax < 1) { rollMax = 1; }
   if (rollMax > 1000) { rollMax = 1000; }
   rollMod = parseInt(command.text.split(' ')[1].split('+')[1].trim());
@@ -50,13 +48,12 @@ if(!command.text.split(' ')[1]){
 
 } else { //backup default 
   rollCount = 1;
-  rollMin = 1;
   rollMax = 20; // default to d20
   rollMod = 0;
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + " + " +rollMod), command.name, command.user_id);
+  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);
   
   relThis.res.end();
 }
@@ -65,54 +62,27 @@ function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
   var which = 1;
-  var message= "";
+  var crit20 = {"Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!", "Brilliant!","You'e a juggernaut!"};
+  var crit1 = {"Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"};
+
   //relThis.res.writeHead(200);
   if(count === 1){
-    result = min + Math.floor(Math.random()*(max-min+1));
+    textResult = min + Math.floor(Math.random()*(max-min+1));
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
     }
+    textResult = result;     
   }
-  
+
   if(count == 1 && result == max && max == 20  ) {
-      //Celebrate natural 20
-       which = 1 + Math.floor(Math.random()*(3)); //choose a message
-      switch (which) {
-        case 1:
-         message = "(Nat 20!)";
-         break; 
-        case 2:
-         message = "(Yah, mon!)";
-         break; 
-        case 3:
-         message = "(Wowsers!)";
-         break;  
-        default: 
-         message = "(Nat 20!)";
-       }
-      textResult = result + mod + " " + message;
+      //Celebrate natural 20 on d20!
+      which = Math.floor(Math.random()*(crit20.length)); //choose a message
+      textResult = result + mod + " (" + crit20[which] + ")";    
   } else if (count == 1 && result == 1 && max == 20) {
-      //Curse natural 1 on d20
-       which = 1 + Math.floor(Math.random()*(4)); //choose a message
-      switch (which) {
-        case 1:
-         message = "(ONE! Ouch!)";
-         break; 
-        case 2:
-         message = "(I didn't just roll that. Did I?)";
-         break; 
-        case 3:
-         message = "(Darn!)";
-         break;  
-        case 4: 
-         message = "(Critical failure!)" 
-         break;
-        default: 
-         message = "(ONE! Ouch!)";
-       }
-      textResult = result + mod + " " + message;    
-  
+      //Curse natural 1 on d20!
+      which = Math.floor(Math.random()*(crit1.length)); //choose a message
+      textResult = result + mod + " (" + crit1[which] + ")";    
   } else {
       textResult = result + mod; 
   }
