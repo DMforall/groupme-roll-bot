@@ -2,8 +2,8 @@ var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
 botCommand =  /^\/roll/;
-//rr
-//d4, d6, d8, d10, d20
+// /roll
+// d4, d6, d8, d10, d20
 // User rolls val
 
 
@@ -19,9 +19,7 @@ function respond() {
 }
 
 function commandHandler(relThis, command){
-  /*
-Default vals   
-*/
+  //Default vals   
   var rollCount = 1, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
       rollMin = 1,
       rollMax = 1,
@@ -53,8 +51,7 @@ if(!command.text.split(' ')[1]){
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);
-  
+  postMessage((command.name + " rolls " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
 
@@ -62,27 +59,27 @@ function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
   var which = 1;
-  var crit20 = {"Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!", "Brilliant!","You'e a juggernaut!"};
+  var crit20 = {"Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"};
   var crit1 = {"Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"};
 
   //relThis.res.writeHead(200);
   if(count === 1){
-    textResult = min + Math.floor(Math.random()*(max-min+1));
+    result = min + Math.floor(Math.random()*(max-min+1));
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
-    }
-    textResult = result;     
+    } 
   }
-
+  textResult = result; //basic total
+  
   if(count == 1 && result == max && max == 20  ) {
       //Celebrate natural 20 on d20!
-      which = Math.floor(Math.random()*(crit20.length)); //choose a message
-      textResult = result + mod + " (" + crit20[which] + ")";    
+      //which = Math.floor(Math.random()*(crit20.length)); //choose a message
+      textResult = result + mod + " (20!)"; //+ crit20[which] + ")";    
   } else if (count == 1 && result == 1 && max == 20) {
       //Curse natural 1 on d20!
-      which = Math.floor(Math.random()*(crit1.length)); //choose a message
-      textResult = result + mod + " (" + crit1[which] + ")";    
+      //which = Math.floor(Math.random()*(crit1.length)); //choose a message
+      textResult = result + mod + " (1!)";// + crit1[which] + ")";    
   } else {
       textResult = result + mod; 
   }
