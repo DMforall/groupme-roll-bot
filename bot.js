@@ -1,7 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
-botCommand =  /^\/[rz]|[roll]/;
+botCommand =  /^\/roll/;
 //rr
 //d4, d6, d8, d10, d20
 // User rolls val
@@ -64,26 +64,34 @@ if(!command.text.split(' ')[1]){
 function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
+  var which = 1;
+  var message= "";
   //relThis.res.writeHead(200);
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
-  //  if(result == max && (max == 20 || max == 100) ) {
-  //    postMessage(("SMASHING! " + command.name + " rolls " +result+ " on d" +max+ "!!!"), command.name, command.user_id);
-  //  } else {  
-  //    postMessage((command.name + " rolls " +result+ " on d" +max+ "."), command.name, command.user_id);
-  //  }
-    
   } else {
     for(i = 0; i < count; i++){
       result = result + (min + Math.floor(Math.random()*(max-min+1)));
-  //    if(result == max && (max == 20 || max == 100) ) {
-  //      postMessage((command.name + " rolls " +max+ " on d" +max+ "!!!"), command.name, command.user_id);
-  //    }
     }
   }
-  //relThis.res.end();
+  //Celebrate natural 20
+  which = 1 + Math.floor(Math.random()*(3));
+  switch (which) {
+  case 1:
+    message = "(Nat 20!)";
+    break; 
+  case 2:
+    message = "(Yah, mon!)";
+    break; 
+  case 3:
+    message = "(Wowsers!)";
+    break;  
+  default: 
+    message = "(Nat 20!)";
+   }
+  
   if(count == 1 && result == max && max == 20  ) {
-      textResult = result + " (Nat 20!)";
+      textResult = result + mod + " " + message;
   } else {
       textResult = result + mod; 
   }
