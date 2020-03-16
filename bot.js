@@ -6,7 +6,6 @@ botCommand =  /^\/roll/;
 // d4, d6, d8, d10, d20
 // User rolls val
 
-
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && botCommand.test(request.text)){
@@ -25,27 +24,25 @@ function commandHandler(relThis, command){
       rollMax = 20,
       rollMod = 0, //added
       thisRoll = 0;
-
-  if ( command.text.split(' ')[1].split('+')[1] ) {
+  
+  command.text = command.text.toLowerCase;
+    if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
   }
   
-/*else if (command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1] ) {
-  //dice setup without mod
-  rollCount = parseInt( command.text.split('d')[0] );
-  if (rollCount < 1) { rollCount = 1; }
-  if (rollCount > 1000) { rollCount = 1000; }
-  rollMax = parseInt( command.text.split('d')[1] );
-  if (rollMax < 1) { rollMax = 1; }
-  if (rollMax > 1000) { rollMax = 1000; } 
-} else { //backup default 
-  rollCount = 1;
-  rollMax = 20; // default to d20
-  rollMod = 0;
-} */
+  if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
+   //dice setup
+   rollCount = parseInt( command.text.split(' ')[1].split('d')[0] );
+   if (rollCount < 1) { rollCount = 1; }
+   if (rollCount > 1000) { rollCount = 1000; }
+   rollMax = parseInt( command.text.split(' ')[1].split('d')[1] );
+   if (rollMax < 1) { rollMax = 1; }
+   if (rollMax > 1000) { rollMax = 1000; } 
+  }
+  
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
