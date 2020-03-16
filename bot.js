@@ -24,7 +24,7 @@ function commandHandler(relThis, command){
   var    rollMax = 20;
   var    rollMod = 0; //added
   
-  command.text = command.text.split(' ')[1].text.toLowerCase;
+  command.text = command.text.split(' ')[1].toLowerCase;
    /* if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
