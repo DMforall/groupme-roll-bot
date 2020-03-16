@@ -36,14 +36,14 @@ if(!command.text.split(' ')[1]){
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   if (rollCount < 1) { rollCount = 1; }
   if (rollCount > 1000) { rollCount = 1000; }
+  command.text = command.text.replace(/\s+/g, '');
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
   if (rollMax < 1) { rollMax = 1; }
   if (rollMax > 1000) { rollMax = 1000; }
-  rollMod = parseInt(command.text.split(' ')[1].split('+')[1].trim());
+  rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
   if (rollMod < 0) { rollMod = 0; }
   if (rollMod > 1000) { rollMod = 1000; }  
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
-
 } else { //backup default 
   rollCount = 1;
   rollMax = 20; // default to d20
@@ -59,8 +59,8 @@ function roll(count, min, max, mod){
   var result = 0;
   var textResult = "";
   var which = 1;
-  var critSuccess = ["Nat 20!","Ya, mon","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"];
-  var critFailure = ["Oh no!", "A ONE! Really.", "Did I roll that?", "Darn.", "A hungry Illithid licks your brain!","Critical failure!"];
+  var critSuccess = ["Nat 20!","You rocked that!","Ya, mon!","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You'e a juggernaut!"];
+  var critFailure = ["Oh no!","A ONE! Really.","Ouch!","Did I roll that?","Darn.","A hungry Illithid licks your brain!","Critical failure!"];
 
   //relThis.res.writeHead(200);
   if(count === 1){
