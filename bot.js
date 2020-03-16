@@ -33,14 +33,16 @@ if(!command.text.split(' ')[1]){
   rollMod = 0;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
-  rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
+  //var a = parseInt("10d20+5".split("+")[1]) + "<br>"; //mod
+  //var b = parseInt("10d20+5".split("+")[0]) + "<br>"; //count
+  //var c = parseInt("10d20+5".split("+")[0].split("d")[1]) + "<br>"; //sides
+  rollCount = parseInt(command.text.split("+")[0]);
   if (rollCount < 1) { rollCount = 1; }
   if (rollCount > 1000) { rollCount = 1000; }
-  command.text = command.text.replace(/\s+/g, '');
-  rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+  rollMax = parseInt(command.text.split("+")[0].split("d")[1]);
   if (rollMax < 1) { rollMax = 1; }
   if (rollMax > 1000) { rollMax = 1000; }
-  rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+  rollMod = parseInt(command.text.split("+")[1]);
   if (rollMod < 0) { rollMod = 0; }
   if (rollMod > 1000) { rollMod = 1000; }  
   thisRoll = roll(rollCount, rollMin, rollMax, rollMod);
