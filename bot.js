@@ -23,6 +23,7 @@ function commandHandler(relThis, command){
   var    rollMin = 1;
   var    rollMax = 20;
   var    rollMod = 0; //added
+  var    temp = "";
   
   command.text = String(command.text).toLowerCase();
   command.text = command.text.replace(/\/roll/, ""); 
@@ -32,7 +33,9 @@ function commandHandler(relThis, command){
    if ( Number.isNaN(rollMod) ) { rollMod = 0; } 
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
-  // command.text = command.text.slice( 0, command.text.search(/\+/))-1 )
+   temp = command.text;
+   //command.text = command.text.slice( 0, temp.search(/\+/)-1 ); 
+   command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
   } 
 
  // if ( command.text.search(/d/) > -1 ) { //Check for input xdy
