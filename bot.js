@@ -25,14 +25,14 @@ function commandHandler(relThis, command){
   var    rollMod = 0; //added
   
   command.text = String(command.text).toLowerCase();
-   /* if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
+  if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
   }
   
-  if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
+  /*if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
    //dice setup
    rollCount = parseInt( command.text.split(' ')[1].split('d')[0] );
    if (rollCount < 1) { rollCount = 1; }
