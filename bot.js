@@ -41,10 +41,10 @@ function commandHandler(relThis, command){
    //if ( Number.isNaN(rollCount) ) { rollCount = 1; }  
    //if (rollCount < 1) { rollCount = 1; }
    //if (rollCount > 1000) { rollCount = 1000; }
-   rollMax = parseInt( command.text.substr( command.text.search(/d/)+1 ) );
-   if ( Number.isNaN(rollMax) ) { rollMax = 100; } 
-   if (rollMax < 1) { rollMax = 1; }
-   if (rollMax > 1000) { rollMax = 1000; } 
+   //rollMax = parseInt( command.text.substr( command.text.search(/d/)+1 ) );
+   //if ( Number.isNaN(rollMax) ) { rollMax = 100; } 
+   //if (rollMax < 1) { rollMax = 1; }
+   //if (rollMax > 1000) { rollMax = 1000; } 
   }
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
