@@ -9,7 +9,7 @@ botCommand =  /^\/roll/;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && botCommand.test(request.text)){
-      commandHandler(this, request);
+    commandHandler(this, request);
   } else {
     console.log("don't care");
     this.res.writeHead(200);
@@ -24,15 +24,20 @@ function commandHandler(relThis, command){
   var    rollMax = 20;
   var    rollMod = 0; //added
   
-  command.text = String(command.text); //.toLowerCase();
-  if ( command.text.split(' ')[1].split('+')[1] ) { //Is there a mod?
+  command.text = String(command.text).toLowerCase();
+  if (command.text.length > 5) { 
+    command.text = command.text.split('\\roll')[1]; 
+  } else {
+    command.text = "";  
+  }
+  /*if ( command.text.split('+')[1] ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
   }
   
-  /*if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
+  if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
    //dice setup
    rollCount = parseInt( command.text.split(' ')[1].split('d')[0] );
    if (rollCount < 1) { rollCount = 1; }
