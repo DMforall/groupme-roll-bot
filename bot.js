@@ -34,6 +34,7 @@ function commandHandler(relThis, command){
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
    temp = command.text;
+   command.text = command.text.slice( 0, temp.indexOf("+")-1 );  
    //command.text = command.text.slice( 0, temp.search(/\+/)-1 ); 
    //command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
   } 
