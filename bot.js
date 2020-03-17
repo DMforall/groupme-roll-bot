@@ -42,8 +42,7 @@ function commandHandler(relThis, command){
 
   if ( command.text.includes("d") ) { //Check for input xdy
    //dice setup
-   temp = command.text; 
-   rollCount = parseInt( command.text.slice(0, temp.indexOf("d")-1 );
+   rollCount = parseInt( command.text.slice(0, command.text.indexOf("d") -1 ) );
    if ( Number.isNaN(rollCount) ) { rollCount = 1; }  
    if (rollCount < 1) { rollCount = 1; }
    if (rollCount > 1000) { rollCount = 1000; }
