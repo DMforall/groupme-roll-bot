@@ -28,6 +28,7 @@ function commandHandler(relThis, command){
   command.text = String(command.text).toLowerCase();
   //command.text = command.text.replace(/\/roll/, ""); //works
   if (command.text.length > 5) { command.text = command.text.slice(5).trim()} ;
+ 
   if ( command.text.search(/\+/) > -1 ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt( command.text.substr( command.text.search(/\+/) ) );
@@ -35,7 +36,7 @@ function commandHandler(relThis, command){
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
    temp = command.text;
-   command.text = command.text.slice( 0, temp.indexOf("+") );  
+   command.text = command.text.slice( 0, temp.search(/\+/) ); //temp.indexOf("+") );  
    //command.text = command.text.slice( 0, temp.search(/\+/)-1 ); 
    //command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
   } 
