@@ -56,7 +56,7 @@ function commandHandler(relThis, command){
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(400);
-  postMessage( (command.name + " rolls " + rollCount + "d" + rollMax + "+" + rollMod + ": "+ roll(rollCount, rollMin, rollMax, rollMod) ), 
+  postMessage( (command.name+" rolls "+rollCount+"d"+rollMax+ "+" + rollMod + ": "+ roll(rollCount, rollMin, rollMax, rollMod) ), 
               command.name, command.user_id);  
   relThis.res.end();
 }
