@@ -24,8 +24,8 @@ function commandHandler(relThis, command){
   var    rollMax = 20;
   var    rollMod = 0; //added
   
-  command.text = String(command.text).toLowerCase();
-  if ( command.text.split(' ')[1].split('+')[1] ) { //Is a mod there?
+  command.text = String(command.text); //.toLowerCase();
+  if ( command.text.split(' ')[1].split('+')[1] ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
    if (rollMod < 0) { rollMod = 0; }
@@ -43,7 +43,7 @@ function commandHandler(relThis, command){
   }*/
   
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  relThis.res.writeHead(200);
+  relThis.res.writeHead(400);
   postMessage((command.name + " rolls ["+ command.text +"] " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
