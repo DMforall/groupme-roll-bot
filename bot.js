@@ -40,17 +40,18 @@ function commandHandler(relThis, command){
    //command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
   } 
 
- // if ( command.text.search(/d/) > -1 ) { //Check for input xdy
+  if ( command.text.search(/d/) > -1 ) { //Check for input xdy
    //dice setup
-   //rollCount = parseInt( command.text.slice(0, command.text.search(/d/)-1) );
-   //if ( Number.isNaN(rollCount) ) { rollCount = 1; }  
-   //if (rollCount < 1) { rollCount = 1; }
-   //if (rollCount > 1000) { rollCount = 1000; }
+   temp = command.text; 
+   rollCount = parseInt( command.text.slice(0, temp.indexOf("d") );
+   if ( Number.isNaN(rollCount) ) { rollCount = 1; }  
+   if (rollCount < 1) { rollCount = 1; }
+   if (rollCount > 1000) { rollCount = 1000; }
    //rollMax = parseInt( command.text.substr( command.text.search(/d/)+1 ) );
    //if ( Number.isNaN(rollMax) ) { rollMax = 100; } 
    //if (rollMax < 1) { rollMax = 1; }
    //if (rollMax > 1000) { rollMax = 1000; } 
- // }
+  }
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(400);
