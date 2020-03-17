@@ -32,6 +32,7 @@ function commandHandler(relThis, command){
    if ( Number.isNaN(rollMod) ) { rollMod = 0; } 
    if (rollMod < 0) { rollMod = 0; }
    if (rollMod > 1000) { rollMod = 1000; }  
+   command.text = command.text.slice( 0, command.text.search(/\+/))-1 )
   } 
 
   if ( command.text.search(/d?/) > -1 ) { //Check for input xdy
