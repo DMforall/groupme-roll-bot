@@ -28,10 +28,11 @@ function commandHandler(relThis, command){
   command.text = command.text.replace(/\/roll/, ""); 
   if ( command.text.includes("+") ) { //Is there a mod?
    //parse out modifier
-   rollMod = parseInt( command.text.substr( command.text.search(/\+/) ) );
+   /*rollMod = parseInt( command.text.substr( command.text.search(/\+/) ) );
    if ( Number.isNaN(rollMod) ) { rollMod = 0; } 
    if (rollMod < 0) { rollMod = 0; }
-   if (rollMod > 1000) { rollMod = 1000; }  
+   if (rollMod > 1000) { rollMod = 1000; }  */
+    rollMod = 3;
   }
   
   /*
