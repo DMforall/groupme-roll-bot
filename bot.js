@@ -25,15 +25,14 @@ function commandHandler(relThis, command){
   var    rollMod = 0; //added
   
   command.text = String(command.text).toLowerCase();
- // command.text = command.text.replace(/\/roll/, ""); 
-/*  if ( command.text.includes("+") ) { //Is there a mod?
+  command.text = command.text.replace(/\/roll/, ""); 
+  if ( command.text.includes("+") ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt( command.text.substr( command.text.search(/\+/) ) );
    if ( Number.isNaN(rollMod) ) { rollMod = 0; } 
    if (rollMod < 0) { rollMod = 0; }
-   if (rollMod > 1000) { rollMod = 1000; }  */
-
-  } */
+   if (rollMod > 1000) { rollMod = 1000; }  
+  } 
   
   /*
   if (command.text.split(' ')[1].split('d')[1] ) { //Check for input xdy
@@ -47,7 +46,7 @@ function commandHandler(relThis, command){
   }*/
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  relThis.res.writeHead(300);
+  relThis.res.writeHead(200);
   postMessage( (command.name + " rolls ["+ command.text +"] " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
@@ -59,7 +58,6 @@ function roll(count, min, max, mod) {
   var critSuccess = ["Nat 20!","One dead dragon!","You rocked that!","Ya, mon!","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You are a juggernaut!"];
   var critFailure = ["Oh no!","A ONE! Really.","You did not want to do that anyway.","Ouch!","Did you roll that?","Darn.","A hungry Illithid licks your brain!","Critical failure!"];
 
-  //relThis.res.writeHead(200);
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
   } else {
@@ -79,8 +77,7 @@ function roll(count, min, max, mod) {
       textResult = result + mod + " (" + critFailure[which] + ")";    
   } else {
       textResult = result + mod; 
-  }
-  
+  }  
   return textResult;
 }
 
