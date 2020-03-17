@@ -34,13 +34,13 @@ function commandHandler(relThis, command){
    if (rollMod > 1000) { rollMod = 1000; }  
   } 
 
-  if ( command.text.search(/d/) > -1 ) { //Check for input xdy
+  if ( command.text.search(/d?/) > -1 ) { //Check for input xdy
    //dice setup
    rollCount = parseInt( command.text.slice(0, command.text.search(/d/)-1) );
    if ( Number.isNaN(rollCount) ) { rollCount = 1; }  
    if (rollCount < 1) { rollCount = 1; }
    if (rollCount > 1000) { rollCount = 1000; }
-   rollMax = parseInt( command.text.substr( command.text.search(/d/) ) );
+   rollMax = parseInt( command.text.substr( command.text.search(/d/)+1 ) );
    if ( Number.isNaN(rollMax) ) { rollMax = 100; } 
    if (rollMax < 1) { rollMax = 1; }
    if (rollMax > 1000) { rollMax = 1000; } 
