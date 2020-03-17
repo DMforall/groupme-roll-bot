@@ -26,7 +26,7 @@ function commandHandler(relThis, command){
   
   command.text = String(command.text).toLowerCase();
   command.text = command.text.replace(/\/roll/, ""); 
-  if ( command.text.includes("+") ) { //Is there a mod?
+  if ( command.text.search(/\+/) > -1 ) { //Is there a mod?
    rollMod = 3; 
   }  
   /*  
