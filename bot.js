@@ -22,10 +22,10 @@ function commandHandler(relThis, command){
   var    rollCount = 1; 
   var    rollMin = 1;
   var    rollMax = 20;
-  var    rollMod = 5; //added
+  var    rollMod = 0; //added
   
   command.text = String(command.text).toLowerCase();
-  command.text = command.text.replace(/\/roll/, ""); 
+ // command.text = command.text.replace(/\/roll/, ""); 
 /*  if ( command.text.includes("+") ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt( command.text.substr( command.text.search(/\+/) ) );
@@ -46,9 +46,9 @@ function commandHandler(relThis, command){
    if (rollMax > 1000) { rollMax = 1000; } 
   }*/
   
-  console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
-  relThis.res.writeHead(400);
-  postMessage((command.name + " rolls ["+ command.text +"] " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
+  //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
+  relThis.res.writeHead(300);
+  postMessage( (command.name + " rolls ["+ command.text +"] " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
   relThis.res.end();
 }
 
