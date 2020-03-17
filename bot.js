@@ -56,7 +56,8 @@ function commandHandler(relThis, command){
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(400);
-  postMessage( (command.name + " rolls ["+ command.text +"] " + roll(rollCount, rollMin, rollMax, rollMod) + " on " + rollCount + "d" + rollMax + "+" +rollMod), command.name, command.user_id);  
+  postMessage( (command.name + " rolls " + rollCount + "d" + rollMax + "+" + rollMod + ": "+ roll(rollCount, rollMin, rollMax, rollMod) ), 
+              command.name, command.user_id);  
   relThis.res.end();
 }
 
@@ -79,11 +80,11 @@ function roll(count, min, max, mod) {
   if(count == 1 && result == max && max == 20  ) {
       //Celebrate natural 20 on d20!
       which = Math.floor(Math.random()*critSuccess.length); //choose a message
-      textResult = result + mod + "(" + critSuccess[which] + ")";    
+      textResult = result + mod + critSuccess[which];    
   } else if (count == 1 && result == 1 && max == 20) {
       //Curse natural 1 on d20!
       which = Math.floor(Math.random()*critFailure.length); //choose a message
-      textResult = result + mod + " (" + critFailure[which] + ")";    
+      textResult = result + mod + critFailure[which];    
   } else {
       textResult = result + mod; 
   }  
