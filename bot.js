@@ -26,7 +26,8 @@ function commandHandler(relThis, command){
   var    temp = "";
   
   command.text = String(command.text).toLowerCase();
-  command.text = command.text.replace(/\/roll/, ""); 
+  //command.text = command.text.replace(/\/roll/, ""); //works
+  command.text = command.text.splice(5);
   if ( command.text.search(/\+/) > -1 ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt( command.text.substr( command.text.search(/\+/) ) );
