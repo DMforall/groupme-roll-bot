@@ -35,7 +35,7 @@ function commandHandler(relThis, command){
    command.text = command.text.slice( 0, command.text.search(/\+/))-1 )
   } 
 
-  if ( command.text.search(/d/) > -1 ) { //Check for input xdy
+ // if ( command.text.search(/d/) > -1 ) { //Check for input xdy
    //dice setup
    //rollCount = parseInt( command.text.slice(0, command.text.search(/d/)-1) );
    //if ( Number.isNaN(rollCount) ) { rollCount = 1; }  
@@ -45,7 +45,7 @@ function commandHandler(relThis, command){
    //if ( Number.isNaN(rollMax) ) { rollMax = 100; } 
    //if (rollMax < 1) { rollMax = 1; }
    //if (rollMax > 1000) { rollMax = 1000; } 
-  }
+ // }
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(400);
