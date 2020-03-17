@@ -25,13 +25,9 @@ function commandHandler(relThis, command){
   var    rollMod = 0; //added
   
   command.text = String(command.text).toLowerCase();
-  command.text = command.text.replace("//roll", "");
+  command.text = command.text.replace("\/roll", "");
   
- /* if ( command.text.includes(" ") ) { 
-    command.text = command.text.split(' ')[1]; 
-  } else {
-    command.text = "";  
-  }*/
+
   /*if ( command.text.split('+')[1] ) { //Is there a mod?
    //parse out modifier
    rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
