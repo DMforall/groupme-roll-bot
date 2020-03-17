@@ -56,7 +56,7 @@ function commandHandler(relThis, command){
   
   //console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(400);
-  postMessage( (command.name+" rolls "+rollCount+"d"+rollMax+ "+" + rollMod + ": "+ roll(rollCount, rollMin, rollMax, rollMod) ), 
+  postMessage( (command.name+" rolls "+rollCount+"d"+rollMax+ "+" + rollMod + "= "+ roll(rollCount, rollMin, rollMax, rollMod) ), 
               command.name, command.user_id);  
   relThis.res.end();
 }
@@ -65,8 +65,12 @@ function roll(count, min, max, mod) {
   var result = 0;
   var textResult = "";
   var which = 1;
-  var critSuccess = ["Nat 20!","One dead dragon!","You rocked that!","Ya, mon!","Wowsers!","The ghost of Gary Gygax cheers you on!","Brilliant!","You are a juggernaut!"];
-  var critFailure = ["Oh no!","A ONE! Really.","You did not want to do that anyway.","Ouch!","Did you roll that?","Darn.","A hungry Illithid licks your brain!","Critical failure!"];
+  var critSuccess = ["Nat 20!","One dead dragon!","You rocked that!","Ya, mon!","Wowsers!","The ghost of Gary Gygax cheers you on!",
+                     "Brilliant!","You are a juggernaut!","Masterful!","Woohoo!","Way to go!","Du bist ausgezeichnet!",
+                     "I'm not worthy!","Amazing!"];
+  var critFailure = ["Oh no!","A ONE! Really.","You did not want to do that anyway.","Ouch!","Did you roll that?","Darn.",
+                     "A hungry Illithid licks your brain!","Critical failure!","You call yourself an adventurer?","Gosh, I'm sorry.",
+                     "Give it up now!","And now you will die!"];
 
   if(count === 1){
     result = min + Math.floor(Math.random()*(max-min+1));
@@ -80,11 +84,11 @@ function roll(count, min, max, mod) {
   if(count == 1 && result == max && max == 20  ) {
       //Celebrate natural 20 on d20!
       which = Math.floor(Math.random()*critSuccess.length); //choose a message
-      textResult = result + mod + critSuccess[which];    
+      textResult = result + mod + ". " + critSuccess[which];    
   } else if (count == 1 && result == 1 && max == 20) {
       //Curse natural 1 on d20!
       which = Math.floor(Math.random()*critFailure.length); //choose a message
-      textResult = result + mod + critFailure[which];    
+      textResult = result + mod + ". " + critFailure[which];    
   } else {
       textResult = result + mod; 
   }  
