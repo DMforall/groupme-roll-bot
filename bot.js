@@ -40,7 +40,7 @@ function commandHandler(relThis, command){
    //command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
   } 
 
-  if ( command.text.search(/d/) > -1 ) { //Check for input xdy
+  if ( command.text.includes("d") ) { //Check for input xdy
    //dice setup
    temp = command.text; 
    rollCount = parseInt( command.text.slice(0, temp.indexOf("d") );
