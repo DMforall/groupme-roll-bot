@@ -35,7 +35,7 @@ function commandHandler(relThis, command){
    if (rollMod > 1000) { rollMod = 1000; }  
    temp = command.text;
    //command.text = command.text.slice( 0, temp.search(/\+/)-1 ); 
-   command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
+   //command.text = command.text.replace( temp.substr( command.text.search(/\+/) ) , ""); 
   } 
 
  // if ( command.text.search(/d/) > -1 ) { //Check for input xdy
